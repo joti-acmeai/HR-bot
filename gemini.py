@@ -58,16 +58,18 @@ retriever = vectordb.as_retriever(search_type="similarity", search_kwargs={"k": 
 query_chain = RetrievalQA.from_chain_type(llm=model, retriever=retriever)
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    await update.message.reply_text('Hello! I am an HR chatbot. Ask me anything.')
+    await update.message.reply_text('Hello! I am an HR chatbot for Acme AI. How can I assist you?')
 
 async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     user_message = update.message.text
     history.append({'role': 'user', 'content': user_message})
     
     prompt = (
-        "You are an expert in HR-related topics and have access to a wide range of documents."
-        " Provide detailed and specific answers to the following question based on the available documents:"
+        "You are an expert HR chatbot with access to company policies, guidelines, and other HR-related documents."
+        "Provide detailed and specific answers to the following question based on the available documents:"
         "Your name is Acme AI HR bot."
+        "Reply in English when you're asked a question in English."
+        "Reply in Bengali when you're asked a question in Bengali."
     )
     
     # Formulate the complete query
