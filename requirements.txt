@@ -1,0 +1,10 @@
+langchain
+langchain-community
+telegram
+python-telegram-bot
+chromadb
+streamlit
+google-generativeai 
+langchain-google-genai 
+python-dotenv 
+pypdf
