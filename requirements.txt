@@ -2,7 +2,7 @@ langchain
 langchain-community
 telegram
 python-telegram-bot
-chromadb
+chromadb=0.3.29
 google-generativeai 
 langchain-google-genai 
 python-dotenv 
