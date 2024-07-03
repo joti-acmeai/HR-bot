@@ -23,7 +23,7 @@ load_dotenv()
 
 TELEGRAM_TOKEN = os.getenv("7268994371:AAEelLT9RlYb_jffqiUv-P6wRyi24rNTMws")
 GOOGLE_API_KEY = os.getenv("AIzaSyCGZ-iE1paU93oSY5NHRWA_F8gf3Gs0sCg")
-PERSIST_DIR = 'HR-bot/db/gemini/'  # Replace with your actual directory
+PERSIST_DIR = './HR-bot/db/gemini/'  # Replace with your actual directory
 
 # Initialize chat history
 history = []
@@ -43,7 +43,7 @@ embeddings = GoogleGenerativeAIEmbeddings(model="models/embedding-001")
 
 if not os.path.exists(PERSIST_DIR):
     # Data Pre-processing
-    pdf_loader = DirectoryLoader("HR-bot/data/", glob="./*.pdf", loader_cls=PyPDFLoader)
+    pdf_loader = DirectoryLoader("./HR-bot/data/", glob="./*.pdf", loader_cls=PyPDFLoader)
     
     try:
         pdf_documents = pdf_loader.load()
