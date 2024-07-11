@@ -23,7 +23,12 @@ load_dotenv()
 
 TELEGRAM_TOKEN = os.getenv("7268994371:AAEelLT9RlYb_jffqiUv-P6wRyi24rNTMws")
 GOOGLE_API_KEY = os.getenv("AIzaSyCGZ-iE1paU93oSY5NHRWA_F8gf3Gs0sCg")
-PERSIST_DIR = './HR-bot/db/gemini/'  # Replace with your actual directory
+PERSIST_DIR = './db/gemini/'  # Replace with your actual directory
+
+os.environ["LANGCHAIN_TRACING_V2"]="true"
+os.environ["LANGCHAIN_ENDPOINT"]="https://api.smith.langchain.com"
+os.environ["LANGCHAIN_API_KEY"]="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"
+os.environ["LANGCHAIN_PROJECT"]="HR bot"
 
 # Initialize chat history
 history = []
@@ -43,7 +48,7 @@ embeddings = GoogleGenerativeAIEmbeddings(model="models/embedding-001")
 
 if not os.path.exists(PERSIST_DIR):
     # Data Pre-processing
-    pdf_loader = DirectoryLoader("./HR-bot/data/", glob="./*.pdf", loader_cls=PyPDFLoader)
+    pdf_loader = DirectoryLoader("data/", glob="./*.pdf", loader_cls=PyPDFLoader)
     
     try:
         pdf_documents = pdf_loader.load()
@@ -72,11 +77,14 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
 async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     user_message = update.message.text
     history.append({'role': 'user', 'content': user_message})
-    
+
     prompt = (
         "You are an expert HR chatbot with access to company policies, guidelines, and other HR-related documents."
         "Provide detailed and specific answers to the following question based on the available documents:"
         "Your name is Acme AI HR bot."
+        "Thoroughly read and utilize the HR manual to provide comprehensive and accurate responses to any question asked."
+        "Summarize too large messages into a short detailed message."
+        "When user asks or tell something in any other language than English, you will then reply in that specific language."
     )
     
     # Formulate the complete query
@@ -88,7 +96,16 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
 
     history.append({'role': 'assistant', 'content': bot_response})
     
-    await update.message.reply_text(bot_response)
+    # Check for empty response
+    if not bot_response:
+        bot_response = "I'm sorry, I couldn't find an answer to your question."
+
+    # Split long messages
+    if len(bot_response) > 4096:
+        for i in range(0, len(bot_response), 4096):
+            await update.message.reply_text(bot_response[i:i+4096])
+    else:
+        await update.message.reply_text(bot_response)
 
 def main() -> None:
     retry_attempts = 5
