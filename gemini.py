@@ -108,6 +108,7 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
         await update.message.reply_text(bot_response)
 
 def main() -> None:
+    import telegram
     retry_attempts = 5
     for attempt in range(retry_attempts):
         try:
