@@ -2,6 +2,7 @@ langchain
 langchain-community
 telegram
 python-telegram-bot
+--upgrade python-telegram-bot
 chromadb==0.3.29
 google-generativeai 
 langchain-google-genai 
