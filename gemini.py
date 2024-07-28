@@ -23,7 +23,7 @@ load_dotenv()
 
 TELEGRAM_TOKEN = os.getenv("7268994371:AAEelLT9RlYb_jffqiUv-P6wRyi24rNTMws")
 GOOGLE_API_KEY = os.getenv("AIzaSyCGZ-iE1paU93oSY5NHRWA_F8gf3Gs0sCg")
-PERSIST_DIR = './db/gemini/'  # Replace with your actual directory
+PERSIST_DIR = 'db/gemini/'  # Replace with your actual directory
 
 os.environ["LANGCHAIN_TRACING_V2"]="true"
 os.environ["LANGCHAIN_ENDPOINT"]="https://api.smith.langchain.com"
