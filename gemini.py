@@ -125,7 +125,7 @@ bot.add_handler(CommandHandler("start", start))
 bot.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_message))
 
 # --- Webhook Route ---
-@app.route('/webhook', methods=['POST'])
+@app.route('/7268994371:AAEelLT9RlYb_jffqiUv-P6wRyi24rNTMws', methods=['POST'])
 def webhook_handler():
     if request.method == 'POST':
         update = Update.de_json(request.get_json(force=True), bot.bot)
