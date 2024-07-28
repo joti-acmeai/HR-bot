@@ -1,9 +1,10 @@
 langchain
 langchain-community
 telegram
-python-telegram-bot==21.4
+python-telegram-bot
 chromadb==0.3.29
 google-generativeai 
 langchain-google-genai 
 python-dotenv 
 pypdf
+flask
