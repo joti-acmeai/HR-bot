@@ -118,7 +118,7 @@ def main() -> None:
             app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_message))
             
             logger.info("Bot is starting...")
-            app.run_polling(host="0.0.0.0", port=88)
+            app.run(host="0.0.0.0", port=88)
             break
         except telegram.error.NetworkError as e:
             logger.error(f"Network error: {e}. Attempt {attempt + 1} of {retry_attempts}")
