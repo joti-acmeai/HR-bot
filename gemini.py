@@ -31,9 +31,7 @@ PERSIST_DIR = 'db/gemini/'  # Replace with your actual directory
 
 os.environ["LANGCHAIN_TRACING_V2"] = "true"
 os.environ["LANGCHAIN_ENDPOINT"] = "https://api.smith.langchain.com"
-os.environ[
-    "LANGCHAIN_API_KEY"
-] = "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"
+os.environ["LANGCHAIN_API_KEY"] = "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"
 os.environ["LANGCHAIN_PROJECT"] = "HR bot"
 
 # Initialize chat history
@@ -122,7 +120,7 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
         await update.message.reply_text(bot_response)
 
 # --- Telegram Bot Setup ---
-bot = ApplicationBuilder().token(TELEGRAM_TOKEN).build()
+bot = ApplicationBuilder().token('7268994371:AAEelLT9RlYb_jffqiUv-P6wRyi24rNTMws').build()
 bot.add_handler(CommandHandler("start", start))
 bot.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_message))
 
