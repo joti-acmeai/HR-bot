@@ -128,10 +128,12 @@ bot.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_message))
 @app.route('/7268994371:AAEelLT9RlYb_jffqiUv-P6wRyi24rNTMws', methods=['POST'])
 def webhook_handler():
     if request.method == 'POST':
+        print("Request received!") 
         update = Update.de_json(request.get_json(force=True), bot.bot)
-        bot.process_update(update)
-        print("Webhook received!", request.get_json())
-        return 'ok'
+        print("Update object created:", update)  # Add debugging print
+        bot.process_update(update) 
+        print("Update processed!") # Add debugging print 
+        return 'ok'  
     else:
         abort(403)
 
