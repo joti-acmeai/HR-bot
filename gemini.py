@@ -130,6 +130,7 @@ def webhook_handler():
     if request.method == 'POST':
         update = Update.de_json(request.get_json(force=True), bot.bot)
         bot.process_update(update)
+        print("Webhook received!", request.get_json())
         return 'ok'
     else:
         abort(403)
