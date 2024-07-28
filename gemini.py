@@ -127,15 +127,13 @@ bot.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_message))
 # --- Webhook Route ---
 @app.route('/7268994371:AAEelLT9RlYb_jffqiUv-P6wRyi24rNTMws', methods=['POST'])
 def webhook_handler():
+    def webhook_handler():
     if request.method == 'POST':
-        print("Request received!") 
-        update = Update.de_json(request.get_json(force=True), bot.bot)
-        print("Update object created:", update)  # Add debugging print
-        bot.process_update(update) 
-        print("Update processed!") # Add debugging print 
+        update = Update.de_json(request.get_json(force=True), bot.bot) 
+        bot.process_update(update)
         return 'ok'  
     else:
-        abort(403)
+        abort(403) 
 
 # --- Run Flask App ---
 if __name__ == '__main__':
